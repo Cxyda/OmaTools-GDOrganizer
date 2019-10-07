@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5eacdec6f44c0b812f2e56b4f1fe2e, type: 3}
   m_Name: EntityGroupConfig
   m_EditorClassIdentifier: 
-  GroupNames:
-  - {fileID: 11400000, guid: cb81e66b2d2a045a2be40157193ed157, type: 2}
-  - {fileID: 11400000, guid: be3f2a2b831d44cffbc898bf5eee46a5, type: 2}
+  GroupNames: []
