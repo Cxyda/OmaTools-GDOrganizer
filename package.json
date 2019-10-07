@@ -13,7 +13,6 @@
 	"src": "Assets/Plugins/O.M.A.Games/GD-Organizer",
 	"author": "cxyda <cxyda@polybeast.de> (https://github.com/Cxyda)",
 	"dependencies": {
-		"de.oma.tools.core": "https://github.com/Cxyda/OmaTools-Core.git",
-		"zenject" : https://github.com/modesttree/Zenject.git",
+		"de.oma.tools.core": "git@github.com:Cxyda/OmaTools-Core.git#0.2.1"
 	}
 }
