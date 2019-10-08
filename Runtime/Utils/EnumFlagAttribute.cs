@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Services.EntityService
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils
 {
     /// <summary>
     /// TODO:

@@ -1,7 +1,6 @@
 using System;
-using Data.EntityDefinition;
-using Logic;
-using Plugins.O.M.A.Games.GDOrganizer.Editor;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 

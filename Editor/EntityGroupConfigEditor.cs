@@ -1,3 +1,4 @@
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Services.EntityService
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
     /// An RoomId represents an dynamic object within the game.
@@ -52,23 +52,5 @@ namespace Services.EntityService
         {
             return $"RoomId: '{ReferenceId}'";
         }
-
-        public static void Validate(uint referenceId)
-        {
-            if (Invalid.ReferenceId == referenceId)
-            {
-                throw new Exception(
-                    $"The RoomId {referenceId} is invalid. Please use the EntityIdFactory to create a valid Id.");
-            }
-        }
-        public static void Validate(EntityId referenceId)
-        {
-            if (Invalid == referenceId)
-            {
-                throw new Exception(
-                    $"The RoomId {referenceId} is invalid. Please use the EntityIdFactory to create a valid Id.");
-            }
-        }
     }
-
 }

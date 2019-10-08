@@ -1,12 +1,10 @@
 using System;
-using Data.EntityDefinition;
-using Logic;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Services.GddService;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEditor;
 using UnityEngine;
 
-namespace Services.EntityService.ExtensionMethods
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
 {
     /// <summary>
     /// TODO:
@@ -20,7 +18,7 @@ namespace Services.EntityService.ExtensionMethods
         /// <returns></returns>
         public static EntityGroup Groups(this EntityType type)
         {
-            EntityTypeDefinition typeDefinition = GddLoader.GetEntityTypeDefinition(type);
+            EntityTypeDefinition typeDefinition = GddLoader.GddLoader.GetEntityTypeDefinition(type);
             return typeDefinition.EntityGroups;
         }
 

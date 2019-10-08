@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEngine;
 
-namespace Plugins.O.M.A.Games.GDOrganizer.Editor
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
     /// TODO:

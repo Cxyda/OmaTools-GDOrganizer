@@ -1,4 +1,4 @@
-namespace Services.EntityService
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
     /// The RoomId Factory is responsible to generate unique EntityIds for dynamic game data

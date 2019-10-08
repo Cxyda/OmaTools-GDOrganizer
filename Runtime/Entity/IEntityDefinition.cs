@@ -1,6 +1,6 @@
-using Logic;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 
-namespace Data.EntityDefinition
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
     /// TODO:

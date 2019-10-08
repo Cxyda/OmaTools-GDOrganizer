@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Data.EntityDefinition;
-using Logic;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEngine;
-using Utility;
 
-namespace Services.GddService
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.GddLoader
 {
     /// <summary>
     /// TODO:

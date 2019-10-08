@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Logic;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.O.M.A.Games.GDOrganizer.Editor
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
     /// TODO:

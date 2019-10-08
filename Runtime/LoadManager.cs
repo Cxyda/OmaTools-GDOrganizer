@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Data.Events;
 using JetBrains.Annotations;
 using Plugins.O.M.A.Games.Core;
 using UnityEngine;
-//using Zenject;
+using Zenject;
 
-namespace Utility
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime
 {
     /// <summary>
     /// This is only a container class for Zenject to inject the possibility of starting coroutines here
@@ -34,7 +33,7 @@ namespace Utility
         private readonly Dictionary<int, LoadingJobSize> _loadingOperations =
             new Dictionary<int, LoadingJobSize>();
 
- //       [Inject]
+        [Inject]
         public void Construct(IMessageBroker messageHub)
         {
             _messageHub = messageHub;

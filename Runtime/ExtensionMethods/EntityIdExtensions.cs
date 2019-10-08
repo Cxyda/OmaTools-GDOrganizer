@@ -1,7 +1,8 @@
 using System;
-using Logic;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 
-namespace Services.EntityService.ExtensionMethods
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
 {
     /// <summary>
     /// TODO:

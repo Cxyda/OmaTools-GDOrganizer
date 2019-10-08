@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Logic;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 
-namespace Services.EntityService
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     [Serializable]
     public struct LongEntityGroup

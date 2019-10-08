@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Logic;
-using Plugins.O.M.A.Games.GDOrganizer.Editor;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEditor;
 using UnityEngine;
 

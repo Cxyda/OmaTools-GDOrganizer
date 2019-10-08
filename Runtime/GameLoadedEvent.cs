@@ -1,7 +1,7 @@
 
 using Plugins.O.M.A.Games.Core;
 
-namespace Data.Events
+namespace Plugins.O.M.A.Games.GDOrganizer.Runtime
 {
     /// <summary>
     /// TODO:

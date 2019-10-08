@@ -1,5 +1,3 @@
-using Data.EntityDefinition;
-using Services.EntityService;
 using UnityEngine;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
