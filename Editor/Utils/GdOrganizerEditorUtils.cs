@@ -1,16 +1,17 @@
+
+
+using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
+#if UNITY_EDITOR
 using System;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEngine;
-#if UNITY_EDITOR
 using System.IO;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Generators;
 using UnityEditor;
-using UnityEngine.UI;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
 {
@@ -89,13 +90,64 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
                 AssetDatabase.CreateAsset(entityGroupDefinition,  Path.Combine(path, $"{entityTypeName}.asset"));
             }
         }
-
-        private static void LoadSettingsFile()
+        public static void LoadSettingsFile()
+        {
+            GetSettingsFile();
+        }
+        public static GdOrganizerSettings GetSettingsFile()
         {
             if (_settings == null)
             {
                 _settings = ScriptableObjectEditorUtils.FindFirstOfType<GdOrganizerSettings>();
+                if (_settings == null)
+                {
+                    _settings = CreateSettingsFile();
+                }
             }
+
+            return _settings;
+        }
+
+        public static GdOrganizerSettings CreateSettingsFile()
+        {
+            _settings = ScriptableObject.CreateInstance<GdOrganizerSettings>();
+            if (!Directory.Exists(_settings.SettingsPath))
+            {
+                Directory.CreateDirectory(_settings.SettingsPath);
+            }
+            AssetDatabase.CreateAsset(_settings, $"{Path.Combine(_settings.SettingsPath, "GdOrganizerSettings")}.asset");
+            AssetDatabase.Refresh();
+            AssetDatabase.SaveAssets();
+            return _settings;
+        }
+        
+        public static void CreateConfigFiles()
+        {
+            var typeConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityTypeConfig>();
+            var groupConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityGroupConfig>();
+
+            if (typeConfig == null || groupConfig == null)
+            {
+                if (!Directory.Exists(_settings.ConfigRootPath))
+                {
+                    Directory.CreateDirectory(_settings.ConfigRootPath);
+                }
+
+                if (typeConfig == null)
+                {
+                    typeConfig = ScriptableObject.CreateInstance<EntityTypeConfig>();
+                    AssetDatabase.CreateAsset(typeConfig, $"{Path.Combine(_settings.ConfigRootPath, "EntityTypeConfig")}.asset");
+
+                }
+                if (groupConfig == null)
+                {
+                    groupConfig = ScriptableObject.CreateInstance<EntityGroupConfig>();
+                    AssetDatabase.CreateAsset(groupConfig, $"{Path.Combine(_settings.ConfigRootPath, "EntityGroupConfig")}.asset");
+                }
+            }
+
+            AssetDatabase.Refresh();
+            AssetDatabase.SaveAssets();
         }
     }
 }

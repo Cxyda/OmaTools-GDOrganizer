@@ -188,7 +188,8 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         private static void WriteBody()
         {
             int indentation = 1;
-            
+            var noneHash = "None".GetHashCode();
+
             AppendContent(GetLine("[System.Flags]", indentation));
 
             AppendContent(GetLine("public enum EntityType", indentation));
@@ -196,7 +197,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             indentation++;
             
             AppendContent(GetLine($"Invalid = 0,", indentation));
-            AppendContent(GetLine($"None = 1,", indentation));
+            AppendContent(GetLine($"None = {noneHash},", indentation));
             
             foreach (var type in _enumNames)
             {

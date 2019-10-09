@@ -21,9 +21,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             
             if(GUILayout.Button("Regenerate"))
             {
-                EditorPrefs.SetBool(GdOrganizerWindow.RegenerationTriggeredKey, true);
+                EditorPrefs.SetBool(GdOrganizerWatcher.RegenerationTriggeredKey, true);
                 
-                GdOrganizerWindow.Regenerate();
+                GdOrganizerWatcher.Regenerate();
             }
             
             DrawDefaultInspector();

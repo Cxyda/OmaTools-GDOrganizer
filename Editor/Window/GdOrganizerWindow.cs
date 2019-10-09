@@ -10,7 +10,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
 {
     public class GdOrganizerWindow : EditorWindow
     {
-        public const string RegenerationTriggeredKey = "OMAGames.GDOrganizer.RegenerationTriggered";
 
         [MenuItem("O.M.A.Tools/GD-Organizer/Settings", priority = 100)]
         static void SelectSettingsFile()
@@ -24,6 +23,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
         [MenuItem("O.M.A.Tools/GD-Organizer/Gd-Organizer Ui", priority = 1)]
         static void Init()
         {
+            GdOrganizerEditorUtils.LoadSettingsFile();
+            GdOrganizerEditorUtils.CreateConfigFiles();
+            
             // Get existing open window or if none, make a new one:
             GdOrganizerWindow window = (GdOrganizerWindow)EditorWindow.GetWindow(typeof(GdOrganizerWindow), false, "GD-Organizer", true);
             window.Show();
@@ -47,39 +49,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
             */
         }
         
-        [DidReloadScripts]
-        public static void OnCompileScripts()
-        {
-            if (!EditorPrefs.GetBool(RegenerationTriggeredKey))
-            {
-                return;
-            }
-            var entityGroupConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityGroupConfig>();
-            var entityTypeConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityTypeConfig>();
-            
-            EntityTypeGenerator.CleanupUnusedDefinitions();
-            EntityGroupGenerator.CleanupUnusedDefinitions();
-                
-            EntityTypeGenerator.GenerateDefinitions();
-            EntityGroupGenerator.GenerateDefinitions();
-            
-            entityTypeConfig.EntityTypeDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityTypeDefinition>();
-            entityGroupConfig.EntityGroupDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityGroupDefinition>();
-            
-            EditorPrefs.SetBool(RegenerationTriggeredKey, false);
-        }
-        
-        public static void Regenerate()
-        {
-            var entityGroupConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityGroupConfig>();
-            var entityTypeConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityTypeConfig>();
-            
-            entityGroupConfig.ValidateNames();
-            entityTypeConfig.ValidateNames();
 
-            EntityGroupGenerator.GenerateEnums(entityGroupConfig.GroupNames);
-            EntityTypeGenerator.GenerateEnums(entityTypeConfig.EntityNames);
-        }
     }
 }
 

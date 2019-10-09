@@ -17,5 +17,10 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils
 
             return type;
         }
+        public static Type TryGetTypeFromName(string name)
+        {
+            var type = Type.GetType(name);
+            return type;
+        }
     }
 }

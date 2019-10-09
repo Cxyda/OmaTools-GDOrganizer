@@ -20,8 +20,8 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             
             if(GUILayout.Button("Regenerate"))
             {
-                EditorPrefs.SetBool(GdOrganizerWindow.RegenerationTriggeredKey, true);
-                GdOrganizerWindow.Regenerate();
+                EditorPrefs.SetBool(GdOrganizerWatcher.RegenerationTriggeredKey, true);
+                GdOrganizerWatcher.Regenerate();
             }
             
             DrawDefaultInspector();
