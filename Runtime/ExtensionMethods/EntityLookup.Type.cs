@@ -1,6 +1,6 @@
 using System;
+using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,16 +11,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
     /// </summary>
     public static partial class EntityLookup
     {
-        /// <summary>
-        /// Returns the Groups of the entity as Flag
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static EntityGroup Groups(this EntityType type)
-        {
-            EntityTypeDefinition typeDefinition = GddLoader.GddLoader.GetEntityTypeDefinition(type);
-            return typeDefinition.EntityGroups;
-        }
+
 
         public static bool IsInGroup(this EntityType type, EntityGroup group)
         {

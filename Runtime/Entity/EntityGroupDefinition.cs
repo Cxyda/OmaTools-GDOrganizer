@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
@@ -7,7 +5,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
     /// <summary>
     /// An EntityTypeDefinition links EntityTypes to certain EntityGroups
     /// </summary>
-    [CreateAssetMenu (fileName = "NewEntityGroupDefinition", menuName = "O.M.A.Tools/GD-Organizer/Add EntityGroup", order = 101)]
+    //[CreateAssetMenu (fileName = "NewEntityGroupDefinition", menuName = "O.M.A.Tools/GD-Organizer/Add EntityGroup", order = 101)]
     public class EntityGroupDefinition : EntityDefinition
     {
         
@@ -15,8 +13,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 
         private void OnValidate()
         {
-            Validate();
-            SaveAsset();
+
         }
 
         [ContextMenu("Validate Asset")]

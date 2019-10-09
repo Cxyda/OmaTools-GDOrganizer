@@ -1,12 +1,12 @@
 using System;
+using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEditor;
 using UnityEngine;
 
-namespace Services.EntityService.Editor
+namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
-    [CustomPropertyDrawer(typeof(LongEntityGroup))]
+    [CustomPropertyDrawer(typeof(EntityGroups))]
     public class LongEntityGroupDrawer : PropertyDrawer
     {
         private int _enumLength;
@@ -18,8 +18,6 @@ namespace Services.EntityService.Editor
 
             EditorGUI.BeginProperty(position, label, property);
             position.y += 5;
-
-            
             
             _groupNames = Enum.GetNames(typeof(EntityGroup));
             _enumLength = _groupNames.Length;
@@ -62,8 +60,6 @@ namespace Services.EntityService.Editor
 
             footerRect.y += 22;
             footerRect.width *= 2;
-            //BitArray bits = new BitArray(System.BitConverter.GetBytes(buttonsIntValue));
-            //GUI.Label(position, bits.ToBitString());
 
             if (EditorGUI.EndChangeCheck()) {
 
@@ -74,7 +70,7 @@ namespace Services.EntityService.Editor
         }
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return Mathf.Ceil((_enumLength+1)/2f)* (EditorGUIUtility.singleLineHeight + 3) + 10;
+            return (Mathf.Ceil(_enumLength+2)/2f) * (EditorGUIUtility.singleLineHeight + 3) + 10;
         }
 
     }

@@ -1,5 +1,4 @@
-﻿using Plugins.O.M.A.Games.GDOrganizer.Runtime;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
+﻿using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ using UnityEngine;
 //*       Project:  "Die Zunft" (WorkingTitle)  			//
 //**********************************************************//  
 
-namespace Utility.Editor
+namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyDrawer : PropertyDrawer

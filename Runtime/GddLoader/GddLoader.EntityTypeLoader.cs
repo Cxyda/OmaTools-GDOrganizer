@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 using UnityEngine;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.GddLoader

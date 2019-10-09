@@ -1,8 +1,9 @@
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Configs
+namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
     /// <summary>
     /// TODO:
@@ -17,14 +18,13 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Configs
         {
             var myTarget = (EntityTypeConfig)target;
             
-            DrawDefaultInspector();
- 
-            
             if(GUILayout.Button("Regenerate"))
             {
-                myTarget.EntityTypes = EntityTypeGenerator.CollectEntityTypeDefinitions();
-                EntityTypeGenerator.RegenerateTypeEnums();
+                EditorPrefs.SetBool(GdOrganizerWindow.RegenerationTriggeredKey, true);
+                GdOrganizerWindow.Regenerate();
             }
+            
+            DrawDefaultInspector();
             
             serializedObject.ApplyModifiedProperties();
         }

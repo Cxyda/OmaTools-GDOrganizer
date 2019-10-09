@@ -1,3 +1,4 @@
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
     [CustomEditor(typeof(EntityGroupConfig))]
     public class EntityGroupConfigEditor : UnityEditor.Editor
     {
+        
         private SerializedProperty _enableAreaBounds;
         private SerializedProperty _cameraLimitationData;
 
@@ -17,14 +19,14 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
         {
             var myTarget = (EntityGroupConfig)target;
             
-            DrawDefaultInspector();
- 
-            
             if(GUILayout.Button("Regenerate"))
             {
-                myTarget.GroupNames = EntityGroupGenerator.CollectEntityGroupDefinitions();
-                EntityGroupGenerator.RegenerateGroupEnums();
+                EditorPrefs.SetBool(GdOrganizerWindow.RegenerationTriggeredKey, true);
+                
+                GdOrganizerWindow.Regenerate();
             }
+            
+            DrawDefaultInspector();
             
             serializedObject.ApplyModifiedProperties();
         }

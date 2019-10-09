@@ -1,6 +1,6 @@
 using System;
+using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Generated;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
 {

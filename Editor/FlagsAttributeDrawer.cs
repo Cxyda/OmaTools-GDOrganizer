@@ -1,9 +1,8 @@
-using Plugins.O.M.A.Games.GDOrganizer.Runtime;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace Services.EntityService.Editor
+namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
     [CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
     public class EnumFlagsAttributeDrawer : PropertyDrawer
