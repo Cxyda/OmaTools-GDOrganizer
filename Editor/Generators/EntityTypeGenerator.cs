@@ -141,7 +141,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             {
                 var modulePath = Directory.GetParent(GetCurrentPath()).Parent.FullName;
                 path = Path.Combine(modulePath, GeneratedFileName);
-
             }
             catch
             {
