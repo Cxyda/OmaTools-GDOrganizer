@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
 using System.IO;
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
 {
@@ -18,11 +19,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// </summary>
     public static class EntityTypeGenerator
     {
-        private const string GeneratedFileName = "../Runtime/Generated/EntityType.cs";
+        private const string GeneratedFileName = "EntityType.cs";
 
         private static string _generatedFileContent = "";
-
-        private static DateTime _lastTimeGenerated;
 
         private static DateTime _now;
         private static List<string> _enumNames = new List<string>();
@@ -139,8 +138,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             var path = "";
             try
             {
-                var modulePath = Directory.GetParent(GetCurrentPath()).Parent.FullName;
-                path = Path.Combine(modulePath, GeneratedFileName);
+                path = Path.Combine(GdOrganizerEditorUtils.GetSettingsFile().GeneratedScriptsRootPath, GeneratedFileName);
             }
             catch
             {
@@ -150,9 +148,12 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             Writeheader();
             WriteDisclaimer();
             WriteBody();
+            if (!Directory.Exists(GdOrganizerEditorUtils.GetSettingsFile().GeneratedScriptsRootPath))
+            {
+                Directory.CreateDirectory(GdOrganizerEditorUtils.GetSettingsFile().GeneratedScriptsRootPath);
+            }
             File.WriteAllText(path, _generatedFileContent);
-            _lastTimeGenerated = _now;
-            
+
             AssetDatabase.SaveAssets();
         }
 

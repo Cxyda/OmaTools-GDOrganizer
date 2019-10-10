@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
 using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using UnityEditor;
 
@@ -14,7 +15,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// </summary>
     public static class EntityDefinitionGenerator
     {
-        private const string GeneratedFilePath = "../Runtime/Generated/EntityDefinitions/";
+        private const string GeneratedFilePath = "EntityDefinitions/";
         public const string NameSuffix = "Definition";
         public const string DefinitionNameSpace = "Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition";
         private static string _generatedFileContent = "";
@@ -31,10 +32,12 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             _now = DateTime.Now;
 
             var path = "";
+            var fullPath = "";
             try
             {
-                var modulePath = Directory.GetParent(GetCurrentPath()).Parent.FullName;
-                path = Path.Combine(modulePath, GeneratedFilePath, $"{_entityGroup}{NameSuffix}.cs");
+                path = Path.Combine(GdOrganizerEditorUtils.GetSettingsFile().GeneratedScriptsRootPath,
+                    GeneratedFilePath);
+                fullPath = Path.Combine(path, $"{_entityGroup}{NameSuffix}.cs");
             }
             catch
             {
@@ -44,26 +47,14 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             Writeheader();
             WriteDisclaimer();
             WriteBody();
-            File.WriteAllText(path, _generatedFileContent);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            File.WriteAllText(fullPath, _generatedFileContent);
             
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-        }
-
-        private static string GetCurrentPath()
-        {
-            var scriptGuids = AssetDatabase.FindAssets($"{typeof(EntityGroupGenerator).Name} t:monoscript");
-            if (scriptGuids.Length == 0)
-            {
-                throw new Exception("Can't find script.");
-            }
-
-            if (scriptGuids.Length > 1)
-            {
-                throw new Exception("Too many scripts found.");
-            }
-
-            return AssetDatabase.GUIDToAssetPath(scriptGuids[0]);
         }
 
         private static void WriteBody()

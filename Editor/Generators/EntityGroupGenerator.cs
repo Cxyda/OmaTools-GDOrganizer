@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
 using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,8 +18,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// </summary>
     public static class EntityGroupGenerator
     {
-        private const string GeneratedFileName = "../Runtime/Generated/EntityGroup.cs";
-
+        private const string GeneratedFileName = "EntityGroup.cs";
         private static string _generatedFileContent = "";
 
         private static DateTime _lastTimeGenerated;
@@ -130,9 +129,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             var path = "";
             try
             {
-                var modulePath = Directory.GetParent(GetCurrentPath()).Parent.FullName;
-                path = Path.Combine(modulePath, GeneratedFileName);
-
+                path = GdOrganizerEditorUtils.GetSettingsFile().GeneratedScriptsRootPath;
             }
             catch
             {
@@ -142,7 +139,11 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             Writeheader();
             WriteDisclaimer();
             WriteBody();
-            File.WriteAllText(path, _generatedFileContent);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            File.WriteAllText(Path.Combine(path, GeneratedFileName), _generatedFileContent);
             _lastTimeGenerated = _now;
             
             AssetDatabase.SaveAssets();
