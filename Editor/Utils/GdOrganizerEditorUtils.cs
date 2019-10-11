@@ -69,6 +69,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
                     break;
                 }
 
+                
                 var path = Path.Combine(_settings.DefinitionsRootPath, $"{flagName}{EntityDefinitionGenerator.NameSuffix}s");
 
                 var typeName = $"{EntityDefinitionGenerator.DefinitionNameSpace}.{flagName}{EntityDefinitionGenerator.NameSuffix}";

@@ -1,10 +1,7 @@
-using Plugins.O.M.A.Games.GDOrganizer.Editor.Generators;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Callbacks;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
 {

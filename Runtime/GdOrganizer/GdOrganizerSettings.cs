@@ -9,9 +9,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer
     public class GdOrganizerSettings : ScriptableObject
     {
         public string DefinitionsRootPath = "Assets/GameDesign/Definitions";
-        public string GeneratedScriptsRootPath = "Assets/Plugins/Gd-Organizer/Generated";
+        public string GeneratedScriptsRootPath = "Assets/Plugins/O.M.A.Games/GDOrganizer/Generated";
         public string ConfigRootPath = "Assets/GameDesign/Configs";
         
-        public string SettingsPath = "Assets/Plugins/Gd-Organizer/Settings";
+        public string SettingsPath = "Assets/Plugins/O.M.A.Games/GDOrganizer/Settings";
     }
 }
