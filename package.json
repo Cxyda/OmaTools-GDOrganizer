@@ -3,7 +3,7 @@
 	"name": "de.oma.tools.gdorganizer",
 	"displayName": "OMA-Tools GD Organizer",
 	"description": "This package provides a basic system to handle GD data for your game",
-	"version": "0.3",
+	"version": "0.3.0",
 	"unity": "2018.3",
 	"license": "GPL-3.0",
 	"repository": {
