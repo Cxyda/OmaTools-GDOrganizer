@@ -3,10 +3,10 @@ using UnityEngine;
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
-    /// An EntityTypeDefinition links EntityTypes to certain EntityGroups
+    /// An EntityPropertyDefinition links EntityTypes to certain EntityProperties
     /// </summary>
-    //[CreateAssetMenu (fileName = "NewEntityGroupDefinition", menuName = "O.M.A.Tools/GD-Organizer/Add EntityGroup", order = 101)]
-    public class EntityGroupDefinition : EntityDefinition
+    //[CreateAssetMenu (fileName = "NewEntityPropertyDefinition", menuName = "O.M.A.Tools/GD-Organizer/Add EntityProperty", order = 101)]
+    public class EntityPropertyDefinition : EntityDefinition
     {
         
 #if UNITY_EDITOR

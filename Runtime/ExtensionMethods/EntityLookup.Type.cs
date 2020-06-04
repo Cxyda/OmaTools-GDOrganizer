@@ -13,7 +13,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
     {
 
 
-        public static bool IsInGroup(this EntityType type, EntityGroup group)
+        public static bool IsInGroup(this EntityType type, EntityProperty property)
         {
             EntityTypeDefinition typeDefinition;
 
@@ -21,16 +21,16 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
             var guids = AssetDatabase.FindAssets("t:EntityTypeDefinition " + type);
             if (guids.Length == 0)
             {
-                throw new Exception($"Cant find group definition {group} for entity type {type}");
+                throw new Exception($"Cant find property definition {property} for entity type {type}");
             }
 
             string guid = guids[0];
             string path = AssetDatabase.GUIDToAssetPath(guid);
             typeDefinition = AssetDatabase.LoadAssetAtPath<EntityTypeDefinition>(path);
 #else
-            typeDefinition = GddLoader.GetEntityTypeDefinition(type);
+            typeDefinition = GdDataProvider.GetEntityTypeDefinition(type);
 #endif
-            return typeDefinition.EntityGroups.HasFlag(group);
+            return typeDefinition.EntityProperties.HasProperty(property);
         }
         public static Sprite UiIcon(this EntityType type)
         {
@@ -44,25 +44,25 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
         /// <returns></returns>
         public static EntityTypeDefinition Definition(this EntityType entityType)
         {
-            //return GddLoader.GetEntityTypeDefinition(entityType);
+            //return GdDataProvider.GetEntityTypeDefinition(entityType);
             return null;
         }
         /// <summary>
         /// Returns the Definition of the Entity of the given Group
         /// </summary>
-        /// <param name="group"></param>
+        /// <param name="property"></param>
         /// <param name="type"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="NotImplementedException"></exception>
-        public static IEntityDefinition GroupDefinition(this EntityType type, EntityGroup group)
+        public static IEntityDefinition GroupDefinition(this EntityType type, EntityProperty property)
         {
-            switch (group)
+            switch (property)
             {
-//                case EntityGroup.Currency:
+//                case EntityProperty.Currency:
 //                    break;
-//                case EntityGroup.Building:
-//                    return GddLoader.GetBuildingDefinition(type);
+//                case EntityProperty.Building:
+//                    return GdDataProvider.GetBuildingDefinition(type);
 
                 default:
                     throw new ArgumentOutOfRangeException();

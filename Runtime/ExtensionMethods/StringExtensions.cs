@@ -17,5 +17,5 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
                 default: return input.First().ToString().ToUpper() + input.Substring(1);
             }
         }
-        }
+    }
 }

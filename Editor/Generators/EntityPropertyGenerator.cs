@@ -16,9 +16,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// <summary>
     /// TODO:
     /// </summary>
-    public static class EntityGroupGenerator
+    public static class EntityPropertyGenerator
     {
-        private const string GeneratedFileName = "EntityGroup.cs";
+        private const string GeneratedFileName = "EntityProperty.cs";
         private static string _generatedFileContent = "";
 
         private static DateTime _lastTimeGenerated;
@@ -56,13 +56,13 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         public static void GenerateDefinitions()
         {
             var addedDefinitions = new List<string>();
-            var existingGroupDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityGroupDefinition>();
+            var existingGroupDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityPropertyDefinition>();
 
             var settings = ScriptableObjectEditorUtils.FindFirstOfType<GdOrganizerSettings>();
             
-            var groupDefinitionPath = Path.Combine(settings.DefinitionsRootPath, "EntityGroupDefinitions");
+            var propertyDefinitionPath = Path.Combine(settings.DefinitionsRootPath, "EntityPropertyDefinitions");
             
-            var definitionNames = Enum.GetNames(typeof(EntityGroup));
+            var definitionNames = Enum.GetNames(typeof(EntityProperty));
             
             foreach (var definitionName in definitionNames)
             {
@@ -74,15 +74,21 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
                 if (!existingGroupDefinitions.Exists(x => x.EntityType.ToString().Equals(definitionName)))
                 {
                     // create SO
-                    var definitionInstance = ScriptableObject.CreateInstance<EntityGroupDefinition>();
+                    var definitionInstance = ScriptableObject.CreateInstance<EntityPropertyDefinition>();
                     var groupType = Enum.Parse(typeof(EntityType), definitionName);
                     
                     definitionInstance.SetEntityType((EntityType) groupType);
-                    if (!Directory.Exists(groupDefinitionPath))
+                    if (!Directory.Exists(propertyDefinitionPath))
                     {
-                        Directory.CreateDirectory(groupDefinitionPath);
+                        Directory.CreateDirectory(propertyDefinitionPath);
                     }
-                    AssetDatabase.CreateAsset(definitionInstance, $"{Path.Combine(groupDefinitionPath, definitionName)}.asset");
+
+                    string fullPath = $"{Path.Combine(propertyDefinitionPath, definitionName)}.asset";
+                    if (File.Exists(fullPath))
+                    {
+                        return;
+                    }
+                    AssetDatabase.CreateAsset(definitionInstance, fullPath);
                 }
                 addedDefinitions.Add(definitionName);
             }
@@ -95,8 +101,8 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
 
         public static void CleanupUnusedDefinitions()
         {
-            var definitionNames = Enum.GetNames(typeof(EntityGroup));
-            var existingGroupDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityGroupDefinition>();
+            var definitionNames = Enum.GetNames(typeof(EntityProperty));
+            var existingGroupDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityPropertyDefinition>();
 
             if (definitionNames.Length != existingGroupDefinitions.Count)
             {
@@ -117,8 +123,10 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
 
             foreach (var groupDefinition in existingGroupDefinitions)
             {
-                var groupType = groupDefinition.EntityType.ToGroup();
-                groupDefinition.SetGroup(groupType);
+                if (groupDefinition.EntityType.TryToGroup(out EntityProperty entityProperty))
+                {
+                    groupDefinition.SetGroup(entityProperty);
+                }
             }
         }
         public static void GenerateFile()
@@ -143,7 +151,10 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             {
                 Directory.CreateDirectory(path);
             }
-            File.WriteAllText(Path.Combine(path, GeneratedFileName), _generatedFileContent);
+
+            string fullPath = Path.Combine(path, GeneratedFileName);
+
+            File.WriteAllText(fullPath, _generatedFileContent);
             _lastTimeGenerated = _now;
             
             AssetDatabase.SaveAssets();
@@ -151,7 +162,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
 
         public static void RemoveEnum(string groupName, bool refresh = true)
         {
-            _enumNames = Enum.GetNames(typeof(EntityGroup)).ToList();
+            _enumNames = Enum.GetNames(typeof(EntityProperty)).ToList();
             _enumNames.Remove(groupName);
             EntityTypeGenerator.RemoveEnum(groupName, refresh);
             GenerateFile();
@@ -162,7 +173,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         }
         private static string GetCurrentPath()
         {
-            var scriptGuids = AssetDatabase.FindAssets($"{typeof(EntityGroupGenerator).Name} t:monoscript");
+            var scriptGuids = AssetDatabase.FindAssets($"{typeof(EntityPropertyGenerator).Name} t:monoscript");
             if (scriptGuids.Length == 0)
             {
                 throw new Exception("Can't find script.");
@@ -176,24 +187,22 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             return AssetDatabase.GUIDToAssetPath(scriptGuids[0]);
         }
 
-        private static EntityGroupConfig GetEntityGroupConfig()
+        private static EntityPropertyConfig GetEntityGroupConfig()
         {
-            var assetGuids = AssetDatabase.FindAssets($"t: {typeof(EntityGroupConfig).Name}");
+            var assetGuids = AssetDatabase.FindAssets($"t: {typeof(EntityPropertyConfig).Name}");
             if (assetGuids.Length == 0)
             {
                 throw new Exception("Can't find EntityGroupConfig. Please create one... > Create > GD-Organizer> EntityGroupConfig");
             }
 
-            return AssetDatabase.LoadAssetAtPath<EntityGroupConfig>(AssetDatabase.GUIDToAssetPath(assetGuids[0]));
+            return AssetDatabase.LoadAssetAtPath<EntityPropertyConfig>(AssetDatabase.GUIDToAssetPath(assetGuids[0]));
 
         }
         private static void WriteBody()
         {
             int indentation = 1;
             
-            AppendContent(GetLine("[System.Flags]", indentation));
-
-            AppendContent(GetLine("public enum EntityGroup : long", indentation));
+            AppendContent(GetLine("public enum EntityProperty", indentation));
             AppendContent(GetLine("{", indentation));
             indentation++;
             int groupCount = 0;
@@ -206,7 +215,8 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
                     continue;
                 }
 
-                AppendContent(GetLine($"{@group} = 1L << {groupCount},", indentation));
+                Enum.TryParse(group, out EntityType typedGroup);
+                AppendContent(GetLine($"{@group} = {(long)typedGroup},", indentation));
                 groupCount++;
             }
             indentation--;
@@ -243,7 +253,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             AppendContent(GetLine("/// ///////////                                                              ///////////", 1));
             AppendContent(GetLine("/// ////////////////////////////////////////////////////////////////////////////////////", 1));
             AppendContent(GetLine($"/// Last time generated: {_now}", 1));
-            AppendContent(GetLine($"///This script has been generated by '{typeof(EntityGroupGenerator).Name}'", 1));
+            AppendContent(GetLine($"///This script has been generated by '{typeof(EntityPropertyGenerator).Name}'", 1));
             AppendContent(GetLine("/// </summary>", 1));
         }
     }

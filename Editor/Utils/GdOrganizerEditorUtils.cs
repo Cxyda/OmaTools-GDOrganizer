@@ -26,14 +26,14 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
         {
             LoadSettingsFile();
             
-            var allGroups = Enum.GetValues(typeof(EntityGroup));
+            var allGroups = Enum.GetValues(typeof(EntityProperty));
             foreach (var group in allGroups)
             {
-                EntityDefinitionGenerator.GenerateGroupDefinitionFile((EntityGroup) group);
+                EntityDefinitionGenerator.GeneratePropertyDefinitionFile((EntityProperty) group);
             }
         }
 
-        public static void GenerateGroupDefinitionsForAllTypes()
+        public static void GeneratePropertyDefinitionsForAllTypes()
         {
             var entityTypeDefinitions = ScriptableObjectEditorUtils.FindAllOfType<EntityTypeDefinition>();
 
@@ -58,21 +58,21 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
             {
                 return;
             }
-            var flags = ((EntityGroup) entityTypeDefinition.EntityGroups).GetFlags();
 
-            foreach (var flag in flags)
+            var properties = entityTypeDefinition.EntityProperties.GetProperties();
+
+            foreach (EntityProperty property in properties)
             {
-                var flagName = flag.ToString();
+                var propertyName = property.ToString();
                 var entityTypeName = entityTypeDefinition.EntityType.ToString();
-                if (flagName.Equals(entityTypeName))
+                if (propertyName.Equals(entityTypeName))
                 {
                     break;
                 }
 
-                
-                var path = Path.Combine(_settings.DefinitionsRootPath, $"{flagName}{EntityDefinitionGenerator.NameSuffix}s");
+                var path = Path.Combine(_settings.DefinitionsRootPath, $"{propertyName}{EntityDefinitionGenerator.NameSuffix}s");
 
-                var typeName = $"{EntityDefinitionGenerator.DefinitionNameSpace}.{flagName}{EntityDefinitionGenerator.NameSuffix}";
+                var typeName = $"{EntityDefinitionGenerator.DefinitionNameSpace}.{propertyName}{EntityDefinitionGenerator.NameSuffix}";
                 var type = GeneratorUtils.GetTypeFromName(typeName);
 
                 var entityGroupDefinition = ScriptableObject.CreateInstance(type);
@@ -125,7 +125,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
         public static void CreateConfigFiles()
         {
             var typeConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityTypeConfig>();
-            var groupConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityGroupConfig>();
+            var groupConfig = ScriptableObjectEditorUtils.FindFirstOfType<EntityPropertyConfig>();
 
             if (typeConfig == null || groupConfig == null)
             {
@@ -142,7 +142,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
                 }
                 if (groupConfig == null)
                 {
-                    groupConfig = ScriptableObject.CreateInstance<EntityGroupConfig>();
+                    groupConfig = ScriptableObject.CreateInstance<EntityPropertyConfig>();
                     AssetDatabase.CreateAsset(groupConfig, $"{Path.Combine(_settings.ConfigRootPath, "EntityGroupConfig")}.asset");
                 }
             }

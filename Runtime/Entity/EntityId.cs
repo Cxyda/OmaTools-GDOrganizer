@@ -3,17 +3,16 @@ using System;
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
-    /// An RoomId represents an dynamic object within the game.
-    /// It has been instantiated and it has an EntityType
+    /// An EntityId is a unique identifier of any entity in the game
     /// </summary>
     [Serializable]
     public struct EntityId
     {
         public static EntityId Invalid = default(EntityId);
 
-        public uint ReferenceId;
+        public readonly long ReferenceId;
 
-        public EntityId(uint referenceId)
+        public EntityId(long referenceId)
         {
             ReferenceId = referenceId;
         }
@@ -50,7 +49,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 
         public override string ToString()
         {
-            return $"RoomId: '{ReferenceId}'";
+            return $"EntityId: '{ReferenceId}'";
         }
     }
 }

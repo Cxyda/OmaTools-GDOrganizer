@@ -10,33 +10,26 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
     /// </summary>
     public static class EntityDefinitionExtensions
     {
-        private static Dictionary<int, EntityGroup> _groupsCache = new Dictionary<int, EntityGroup>();
-        /// <summary>
-        /// Returns the Groups of the entity as Flag
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static EntityGroups Groups(this EntityType type)
-        {
-            var typeDefinition = GddLoader.GddLoader.GetEntityTypeDefinition(type);
-            return typeDefinition.EntityGroups;
-        }
+        private static Dictionary<int, EntityProperty> _groupsCache = new Dictionary<int, EntityProperty>();
         
-        public static EntityGroup ToGroup(this EntityType type)
+        public static bool TryToGroup(this EntityType type, out EntityProperty entityProperty)
         {
+            entityProperty = default;
             var typeHash = type.GetHashCode();
             if (_groupsCache.ContainsKey(typeHash))
             {
-                return _groupsCache[typeHash];
+                entityProperty = _groupsCache[typeHash];
+                return true;
             }
 
-            if (!Enum.TryParse(type.ToString(), out EntityGroup groupType))
+            if (!Enum.TryParse(type.ToString(), out EntityProperty groupType))
             {
-                groupType = 0;
+                return false;
             }
 
             _groupsCache[typeHash] = groupType;
-            return groupType;
+            entityProperty = groupType;
+            return true;
         }
     }
 }

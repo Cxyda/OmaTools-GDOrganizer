@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Label text="Entity Type:" class="sub-headline">
+        <Style src="EntityTypeDefinitionStyle.uss" />
+    </ui:Label>
+    <ui:VisualElement style="padding-left: 10px; padding-right: 10px; padding-top: 0; padding-bottom: 10px;">
+        <Style src="EntityTypeDefinitionStyle.uss" />
+        <uie:EnumField focusable="false" name="current-type-field" style="height: 20px; margin-left: 10px; margin-right: 10px;" />
+    </ui:VisualElement>
+    <ui:Label text="Description:" class="sub-headline" style="-unity-font-style: bold;">
+        <Style src="EntityTypeDefinitionStyle.uss" />
+    </ui:Label>
+    <ui:VisualElement style="padding-left: 10px; padding-right: 10px; padding-top: 0; padding-bottom: 10px; max-height: 300px; flex-grow: 0; flex-shrink: 1; min-height: 30px;">
+        <Style src="EntityTypeDefinitionStyle.uss" />
+        <ui:ScrollView style="max-height: 200px; min-height: 18px;">
+            <ui:TextField picking-mode="Ignore" text="Enter description here ..." readonly="false" multiline="true" name="description-field" password="false" tooltip="Enter a description here, this is for documentation and clarification only." max-length="512" style="align-items: auto; justify-content: space-around; flex-shrink: 1; -unity-font-style: italic; margin-left: 10px; margin-right: 10px; flex-wrap: nowrap; flex-direction: row; flex-grow: 1; flex-basis: initial; display: flex; visibility: visible; overflow: visible; opacity: 0.75;" />
+        </ui:ScrollView>
+    </ui:VisualElement>
+    <uie:PropertyField name="properties-foldout" focusable="true" style="max-height: 300px; height: auto; min-height: 18px; padding-left: 10px; padding-right: 10px; flex-grow: 1; margin-left: 0; margin-right: 10px;">
+        <Style src="EntityTypeDefinitionStyle.uss" />
+    </uie:PropertyField>
+</ui:UXML>

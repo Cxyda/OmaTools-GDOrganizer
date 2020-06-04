@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
     /// <summary>
-    /// TODO:
+    /// An EntityDefinition is the base definition of each game design data definition in the game
     /// </summary>
     public abstract class EntityDefinition : ScriptableObject, IEntityDefinition
     {

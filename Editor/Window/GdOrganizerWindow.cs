@@ -30,10 +30,26 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
 
         void OnGUI()
         {
-            if (GUILayout.Button("Generate Group Definitions"))
+            if (GUILayout.Button(new GUIContent("Generate Enums", "This generates the Enum files from the values stored in the Config files.")))
+            {
+                EditorPrefs.SetBool(GdOrganizerWatcher.RegenerationTriggeredKey, true);
+                GdOrganizerWatcher.Regenerate();
+            }
+            EditorGUILayout.Space(5);
+
+            if (GUILayout.Button(new GUIContent("Generate Property Definitions", "This regenerates all property definition files.")))
             {
                 GdOrganizerEditorUtils.GenerateAllGroupDefinitions();
-                GdOrganizerEditorUtils.GenerateGroupDefinitionsForAllTypes();
+                GdOrganizerEditorUtils.GeneratePropertyDefinitionsForAllTypes();
+            }
+            EditorGUILayout.Space(5);
+
+            if (GUILayout.Button(new GUIContent("Generate All", "This runs the full pipeline")))
+            {
+                EditorPrefs.SetBool(GdOrganizerWatcher.RegenerationTriggeredKey, true);
+                GdOrganizerWatcher.Regenerate();
+                GdOrganizerEditorUtils.GenerateAllGroupDefinitions();
+                GdOrganizerEditorUtils.GeneratePropertyDefinitionsForAllTypes();
             }
             /*
             GUILayout.Label("Base Settings", EditorStyles.boldLabel);
