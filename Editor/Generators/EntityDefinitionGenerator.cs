@@ -73,7 +73,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
 
             AppendContent(GetLine("public EntityType EntityType => _entityType;", indentation));
             AppendContent(GetLine("", indentation));
-            AppendContent(GetLine("// Put in your custom code here ... FOO", indentation));
+            AppendContent(GetLine("// Put in your custom code here ...", indentation));
             AppendContent(GetLine("", indentation));
             AppendContent(GetLine("", indentation));
             AppendContent(GetLine("#if UNITY_EDITOR", 0));
