@@ -7,6 +7,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
@@ -30,6 +31,10 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             
             _rootElement = new VisualElement();
             string path = "Assets/Plugins/O.M.A.Games/GDOrganizer/Editor/EntityTypeDefinitionEditor";
+            if (!Directory.Exists(path))
+            {
+                path = "Packages/OMA-Tools GD Organizer/Editor/EntityTypeDefinitionEditor";
+            }
             _visualTree =
                 AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(Path.Combine(path, "EntityTypeDefinitionTemplate.uxml"));
 
