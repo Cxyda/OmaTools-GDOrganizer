@@ -30,17 +30,31 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             _myTarget= (EntityTypeDefinition)target;
             
             _rootElement = new VisualElement();
-            string path = "Assets/Plugins/O.M.A.Games/GDOrganizer/Editor/EntityTypeDefinitionEditor";
-            if (!Directory.Exists(path))
-            {
-                path = "Packages/OMA-Tools GD Organizer/Editor/EntityTypeDefinitionEditor";
-            }
-            _visualTree =
-                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(Path.Combine(path, "EntityTypeDefinitionTemplate.uxml"));
+            StyleSheet styleSheet = null;
+            string[] templateGuids = AssetDatabase.FindAssets("EntityTypeDefinitionTemplate", null);
+            string[] styleGuids = AssetDatabase.FindAssets("EntityTypeDefinitionStyle", null);
 
-            StyleSheet styleSheet =
-                AssetDatabase.LoadAssetAtPath<StyleSheet>(Path.Combine(path, "EntityTypeDefinitionStyle.uss"));
-            
+            if (templateGuids.Length > 0)
+            {
+                var templatePath = AssetDatabase.GUIDToAssetPath(templateGuids[0]);
+                _visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(templatePath);
+            }
+            else
+            {
+                Debug.LogError("Unable find template EntityTypeDefinitionTemplate");
+            }
+
+            if (styleGuids.Length > 0)
+            {
+                var stylePath = AssetDatabase.GUIDToAssetPath(styleGuids[0]);
+                styleSheet =
+                    AssetDatabase.LoadAssetAtPath<StyleSheet>(stylePath);
+            }
+            else
+            {
+                Debug.LogError("Unable find styleSheet EntityTypeDefinitionStyle");
+            }
+
             _rootElement.styleSheets.Add(styleSheet);
 
         }
