@@ -1,7 +1,3 @@
-
-
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
 #if UNITY_EDITOR
 using System;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
@@ -10,6 +6,7 @@ using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEngine;
 using System.IO;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Generators;
 using UnityEditor;
 
@@ -72,7 +69,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Window
 
                 var path = Path.Combine(_settings.DefinitionsRootPath, $"{propertyName}{EntityDefinitionGenerator.NameSuffix}s");
 
-                var typeName = $"{EntityDefinitionGenerator.DefinitionNameSpace}.{propertyName}{EntityDefinitionGenerator.NameSuffix}";
+                var typeName = $"{GeneratorConstants.DefinitionNamespace}.{propertyName}{EntityDefinitionGenerator.NameSuffix}";
                 var type = GeneratorUtils.GetTypeFromName(typeName);
 
                 var entityGroupDefinition = ScriptableObject.CreateInstance(type);

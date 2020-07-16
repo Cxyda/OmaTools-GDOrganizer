@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEngine;

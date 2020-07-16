@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
+using O.M.A.Games.GDOrganizer.Generated;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods
 {

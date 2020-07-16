@@ -1,4 +1,4 @@
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using O.M.A.Games.GDOrganizer.Generated;
 using UnityEngine;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity

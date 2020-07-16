@@ -1,5 +1,5 @@
 
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using O.M.A.Games.GDOrganizer.Generated;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
@@ -9,8 +9,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
     public interface IEntityDefinition
     {
         EntityType EntityType { get; }
-#if UNITY_EDITOR
         void SetEntityType(EntityType type);
-#endif
     }
 }

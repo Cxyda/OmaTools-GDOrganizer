@@ -1,7 +1,5 @@
-using System;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Generators;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEditor.Callbacks;

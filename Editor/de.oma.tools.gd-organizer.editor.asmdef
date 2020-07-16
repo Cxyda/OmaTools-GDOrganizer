@@ -1,0 +1,15 @@
+{
+    "name": "de.oma.tools.gd-organizer.editor",
+    "references": [
+        "GUID:eabdd18d8cfb84fd2a8e28303bc9efaa"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

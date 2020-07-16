@@ -27,6 +27,5 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             EditorGUI.PropertyField(position, property, label, true);
             GUI.enabled = true;
         }
-
     }
 }

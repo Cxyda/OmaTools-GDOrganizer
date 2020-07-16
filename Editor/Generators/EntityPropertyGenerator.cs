@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
@@ -18,10 +18,9 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// </summary>
     public static class EntityPropertyGenerator
     {
-        private const string GeneratedFileName = "EntityProperty.cs";
+        private static readonly string GeneratedFileName = $"{GeneratorConstants.EntityPropertyEnumName}.cs";
         private static string _generatedFileContent = "";
 
-        private static DateTime _lastTimeGenerated;
         private static List<string> _enumNames = new List<string>();
 
         private static DateTime _now;
@@ -155,7 +154,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             string fullPath = Path.Combine(path, GeneratedFileName);
 
             File.WriteAllText(fullPath, _generatedFileContent);
-            _lastTimeGenerated = _now;
             
             AssetDatabase.SaveAssets();
         }
@@ -216,7 +214,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
                 }
 
                 Enum.TryParse(group, out EntityType typedGroup);
-                AppendContent(GetLine($"{@group} = {(long)typedGroup},", indentation));
+                AppendContent(GetLine($"{@group} = {(int)typedGroup},", indentation));
                 groupCount++;
             }
             indentation--;
@@ -241,7 +239,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         private static void Writeheader()
         {
             AppendContent(GetLine(""));
-            AppendContent(GetLine("namespace Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition"));
+            AppendContent(GetLine($"namespace {GeneratorConstants.GeneratedNamespace}"));
             AppendContent(GetLine("{"));
         }
         private static void WriteDisclaimer()

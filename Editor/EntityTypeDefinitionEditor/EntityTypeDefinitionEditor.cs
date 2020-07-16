@@ -1,13 +1,8 @@
-using System.IO;
-using System.Reflection;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Editor
 {
@@ -30,33 +25,11 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor
             _myTarget= (EntityTypeDefinition)target;
             
             _rootElement = new VisualElement();
-            StyleSheet styleSheet = null;
-            string[] templateGuids = AssetDatabase.FindAssets("EntityTypeDefinitionTemplate", null);
-            string[] styleGuids = AssetDatabase.FindAssets("EntityTypeDefinitionStyle", null);
 
-            if (templateGuids.Length > 0)
-            {
-                var templatePath = AssetDatabase.GUIDToAssetPath(templateGuids[0]);
-                _visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(templatePath);
-            }
-            else
-            {
-                Debug.LogError("Unable find template EntityTypeDefinitionTemplate");
-            }
-
-            if (styleGuids.Length > 0)
-            {
-                var stylePath = AssetDatabase.GUIDToAssetPath(styleGuids[0]);
-                styleSheet =
-                    AssetDatabase.LoadAssetAtPath<StyleSheet>(stylePath);
-            }
-            else
-            {
-                Debug.LogError("Unable find styleSheet EntityTypeDefinitionStyle");
-            }
+            _visualTree = AssetDatabaseHelper.LoadFirstAssetByFilter<VisualTreeAsset>("EntityTypeDefinitionTemplate", null);
+            var styleSheet = AssetDatabaseHelper.LoadFirstAssetByFilter<StyleSheet>("EntityTypeDefinitionStyle", null);
 
             _rootElement.styleSheets.Add(styleSheet);
-
         }
 
         public override void OnInspectorGUI()

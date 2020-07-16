@@ -1,5 +1,5 @@
 using System;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using UnityEditor;
 using UnityEngine;

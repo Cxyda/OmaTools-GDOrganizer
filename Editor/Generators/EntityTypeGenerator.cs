@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Utils;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.GdOrganizer;
-using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -19,7 +18,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     /// </summary>
     public static class EntityTypeGenerator
     {
-        private const string GeneratedFileName = "EntityType.cs";
+        private static readonly string GeneratedFileName = $"{GeneratorConstants.EntityTypeEnumName}.cs";
 
         private static string _generatedFileContent = "";
 
@@ -235,7 +234,7 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         private static void Writeheader()
         {
             AppendContent(GetLine(""));
-            AppendContent(GetLine("namespace Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition"));
+            AppendContent(GetLine($"namespace {GeneratorConstants.GeneratedNamespace}"));
             AppendContent(GetLine("{"));
         }
         private static void WriteDisclaimer()

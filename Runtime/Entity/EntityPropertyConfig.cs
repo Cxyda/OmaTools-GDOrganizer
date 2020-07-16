@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.ExtensionMethods;
 using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;
-using UnityEditor;
 using UnityEngine;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity

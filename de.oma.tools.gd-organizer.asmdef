@@ -1,9 +1,8 @@
 {
-    "name": "de.oma.tools.gdorganizer",
+    "name": "de.oma.tools.gd-organizer",
     "references": [
         "GUID:4bed291109e9a499bb8f50a76078b0b8"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -11,5 +10,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

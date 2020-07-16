@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
+using O.M.A.Games.GDOrganizer.Generated;
 using Plugins.O.M.A.Games.GDOrganizer.Editor.Window;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
 using UnityEditor;
 
 #if UNITY_EDITOR
@@ -16,7 +15,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
     public static class EntityDefinitionGenerator
     {
         public const string NameSuffix = "Definition";
-        public const string DefinitionNameSpace = "Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition";
         private static string _generatedFileContent = "";
 
         private static readonly List<string> EnumNames = new List<string>();
@@ -65,9 +63,8 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
             AppendContent(GetLine($"public class {_entityProperty}Definition : ScriptableObject, IEntityDefinition", indentation));
             AppendContent(GetLine("{", indentation));
             indentation++;
-            var groupCount = 0;
 
-            AppendContent(GetLine($"private const EntityProperty Group = EntityProperty.{_entityProperty};", indentation));
+            AppendContent(GetLine($"private const EntityProperty Component = EntityProperty.{_entityProperty};", indentation));
             AppendContent(GetLine("[SerializeField, ReadOnly]", indentation));
             AppendContent(GetLine("private EntityType _entityType;", indentation));
 
@@ -106,12 +103,15 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         }
         private static void Writeheader()
         {
-            AppendContent(GetLine("using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;"));
+            AppendContent(GetLine("using O.M.A.Games.GDOrganizer.Generated;"));
             AppendContent(GetLine("using Plugins.O.M.A.Games.GDOrganizer.Runtime.Utils;"));
+            AppendContent(GetLine("using Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity;"));
+            
+            
             AppendContent(GetLine("using UnityEngine;"));
             AppendContent(GetLine(""));
 
-            AppendContent(GetLine($"namespace {DefinitionNameSpace}"));
+            AppendContent(GetLine($"namespace {GeneratorConstants.DefinitionNamespace}"));
             
             AppendContent(GetLine("{"));
         }

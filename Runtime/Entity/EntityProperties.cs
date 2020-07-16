@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Plugins.O.M.A.Games.GDOrganizer.GameDesignDefinition;
+using O.M.A.Games.GDOrganizer.Generated;
 
 namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 {
@@ -24,11 +23,10 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Runtime.Entity
 
         public void SetGroup(EntityProperty property)
         {
-            if (_cache.ContainsKey((int) property))
+            if (Properties.Contains(property))
             {
                 return;
             }
-            _cache.Add((int)property, property);
             Properties.Add(property);
         }
         
