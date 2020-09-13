@@ -10,5 +10,6 @@ namespace Plugins.O.M.A.Games.GDOrganizer.Editor.Generators
         internal const string DefinitionNamespace = "O.M.A.Games.GDOrganizer.GameDesignDefinition";
         internal const string EntityTypeEnumName = "EntityType";
         internal const string EntityPropertyEnumName = "EntityProperty";
+        internal const string EntityLookupName = "EntityLookup";
     }
 }
